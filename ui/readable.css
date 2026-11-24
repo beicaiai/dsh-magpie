@@ -1,0 +1,181 @@
+/*
+ * 可读性覆盖层（本机加的，不属于原版 magpie）。
+ *
+ * 原版 app.css 是给「窗口贴近屏幕、字号继承系统」写的，搬进 DSH 面板的
+ * iframe 后有两个问题：一是能按的按钮长得像纯文字（没有边界、没有按下反馈），
+ * 二是副标题/数值这些关键信息用了 --muted / --faint，对比度不够。
+ *
+ * 这里只做「看得清 + 按得动」，不动布局、不动配色体系：颜色一律用
+ * color-mix 从 --fg 推，浅色深色跟着主题走。
+ */
+
+/* ── 1. 能按的东西要有边界 ─────────────────────────────── */
+
+/* 纯文字按钮（Open the main window / Quit / 各处 mini）：给底、给边、给按下 */
+button.text,
+button.mini,
+.mini-btn {
+  border-radius: 8px;
+  padding: 3px 9px;
+  color: var(--fg);
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--card) 100%, #ffffff 6%),
+    color-mix(in srgb, var(--card) 100%, #000000 2%));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #ffffff 55%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--fg) 11%, transparent),
+    0 1px 2px color-mix(in srgb, #0a0c14 7%, transparent);
+  transition: background-color .14s ease, box-shadow .14s ease, transform .12s ease;
+}
+
+button.text:hover,
+button.mini:hover,
+.mini-btn:hover {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--card) 100%, #ffffff 12%),
+    color-mix(in srgb, var(--card) 100%, #000000 1%));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #ffffff 62%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--fg) 19%, transparent),
+    0 2px 5px color-mix(in srgb, #0a0c14 10%, transparent);
+  transform: translateY(-.5px);
+}
+
+button.text:active,
+button.mini:active,
+.mini-btn:active,
+.seg button:active {
+  transform: translateY(0) scale(.965);
+  box-shadow:
+    inset 0 2px 5px color-mix(in srgb, #0a0c14 20%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--fg) 15%, transparent);
+}
+
+/* 没开的分段器：整条凹槽给出来，选中块凸起 */
+.seg {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--fg) 7%, transparent),
+    color-mix(in srgb, var(--fg) 2.5%, transparent));
+  box-shadow:
+    inset 0 1.5px 3px color-mix(in srgb, var(--fg) 10%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, #ffffff 55%, transparent);
+}
+
+.seg button {
+  font-weight: 550;
+  color: color-mix(in srgb, var(--fg) 66%, transparent);
+}
+
+.seg button.on {
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.seg > .thumb {
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #ffffff 78%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--fg) 8%, transparent),
+    var(--seg-edge);
+}
+
+/* ── 2. 重要字样提对比度 ──────────────────────────────── */
+
+/* 列表主名：加一点字重和一点暗度 */
+.row .name {
+  font-weight: 560;
+  color: var(--fg);
+}
+
+/* 副标题：11.5px + --muted 在 iframe 里发虚，提到 12px 并压深一档 */
+.row .sub {
+  font-size: 12px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--fg) 62%, transparent);
+}
+
+/* 数值类（统计、用量、额度）：等宽 + 更亮 */
+.row.stat .num b,
+.row.stat .num,
+.num,
+.val {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.row.stat .num b {
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.row.stat .num small {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--fg) 58%, transparent);
+}
+
+/* 本插件自己的灰阶变量往上提一档：--faint 原来几乎看不见 */
+:root {
+  --faint: #9a9aa4;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --faint: #7c7c86;
+  }
+}
+
+/* 行内说明、菜单快捷键、给不出原因的提示 */
+.row .sub.err {
+  color: var(--red);
+  font-weight: 550;
+}
+
+.row-menu .rm-key,
+.row-menu .rm-why,
+.row .hint,
+.hint {
+  color: color-mix(in srgb, var(--fg) 60%, transparent);
+}
+
+/* ── 3. 列表要有「指到哪一行」的反馈 ──────────────────── */
+
+.row {
+  transition: background-color .12s ease;
+}
+
+.row:hover {
+  background: color-mix(in srgb, var(--fg) 3%, transparent);
+}
+
+.row.drifted:hover {
+  background: color-mix(in srgb, var(--drift) 6%, transparent);
+}
+
+/* ── 4. 焦点环统一成中性色，紫环在深色下太扎眼 ────────── */
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--fg) 42%, transparent);
+  outline-offset: 1.5px;
+}
+
+/* ── 5. 红字提示（接口未实现那种）不要躲在小字里 ──────── */
+
+.not-implemented,
+[data-error="not-implemented"],
+.pm-note,
+.status.err {
+  font-size: 12px;
+  font-weight: 550;
+  line-height: 1.5;
+  color: var(--red);
+}
+
+/* 动效尊重系统设置 */
+@media (prefers-reduced-motion: reduce) {
+  button.text, button.mini, .mini-btn, .seg button, .row {
+    transition: none;
+    transform: none;
+  }
+}

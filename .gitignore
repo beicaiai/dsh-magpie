@@ -1,0 +1,9 @@
+node_modules/
+.staging/
+.mirror/
+*.log
+*.bak
+*.bak-*
+.DS_Store
+Thumbs.db
+.env
