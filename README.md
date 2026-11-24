@@ -27,6 +27,20 @@ magpie 的价值在**插件生态**——一批国内外 AI 平台各自提供�
 
 ---
 
+## 界面
+
+<table>
+<tr>
+<td width="50%"><img src="docs/screenshots/platforms.png" alt="供应商页"><br><sub>供应商 —— 每个平台一张卡片：登录态、模型数、剩余额度</sub></td>
+<td width="50%"><img src="docs/screenshots/usage.png" alt="用量页"><br><sub>用量 —— Token / 请求数 / 费用 / 缓存命中率，按平台明细</sub></td>
+</tr>
+<tr>
+<td colspan="2"><img src="docs/screenshots/store.png" alt="插件页"><br><sub>插件 —— 已装插件配置、可安装列表（商店）、手输包名安装</sub></td>
+</tr>
+</table>
+
+---
+
 ## 支持的供应商
 
 实测 **51 个 provider、101 种登录方式**（完整逐条列表见 [PROVIDERS.md](PROVIDERS.md)）：
@@ -202,8 +216,7 @@ CDN 顺序：`gcore.jsdelivr.net` → `fastly` → `cdn` → `gh-proxy` → `cod
 
 **顶栏第三颗按钮是界面语言**：中文界面显示 `EN`、英文界面显示 `中`，点一下切换，写进 `localStorage.magpie-hub-locale`，下次打开还是这个语言。不点就跟随宿主。
 
-> 截图：`docs/screenshots/` 目录留给你放实际界面图（平台页 / 额度页 / 商店页 / 登录窗）。
-> 本仓库不预置截图，避免与将来版本不一致。
+实际界面见上面「界面」一节（`docs/screenshots/`）。
 
 ---
 
