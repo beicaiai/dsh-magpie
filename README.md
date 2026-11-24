@@ -11,7 +11,6 @@
 
 | | |
 |---|---|
-| 版本 | 0.3.0 |
 | 运行环境 | Node `^22.19.0 \|\| >=24.0.0` |
 | 形态 | 纯 ESM，无可编译步骤 |
 | 许可 | AGPL-3.0-only |
@@ -292,7 +291,7 @@ node selfcheck.mjs      # 逐供应商实跑 authorize()，输出每个 provider
 - **magpie**（MIT）—— 插件协议、数据格式、`ui/` 下的 Web UI 与图标；
 - **DeepSeek Harness**（`@deepseek-ai/*`）—— 宿主运行时与扩展点；
 - **dsh-Go** —— 手机端原生插件协议（`panels` / `composer.strip` / `turn.note`）；
-- **dsh-magpie-hub 0.2.0**（AGPL-3.0）—— 本版的宿主实现演化自该项目，原始版权归 **LingMowen**。
+- **dsh-magpie-hub**（AGPL-3.0）—— 本版的宿主实现演化自该项目，原始版权归 **LingMowen**。
 
 本仓库与上述项目的作者没有隶属关系，也未经他们背书。
 
@@ -300,7 +299,7 @@ node selfcheck.mjs      # 逐供应商实跑 authorize()，输出每个 provider
 
 ## 变更记录
 
-见 [CHANGELOG.md](CHANGELOG.md)。0.3.0 的主要变化：
+见 [CHANGELOG.md](CHANGELOG.md)。本次的主要变化：
 
 | 项 | 变化 |
 |---|---|
@@ -326,7 +325,7 @@ sed -i 's/YOUR_GITHUB_NAME/<你的用户名>/g' package.json README.md
 ```sh
 git init
 git add .
-git commit -m "dsh-magpie 0.3.0"
+git commit -m "dsh-magpie"
 git branch -M main
 git remote add origin https://github.com/<你的用户名>/dsh-magpie.git
 git push -u origin main

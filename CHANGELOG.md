@@ -1,6 +1,6 @@
 # 变更记录
 
-## 0.3.0
+## 当前
 
 ### 登录
 
@@ -17,13 +17,15 @@
 - 下载链路改为**代理感知**（`src/net.js`）：运行时读系统代理设置，
   Clash 开不开、端口换成什么都不影响。
 - CDN 首选换成 `gcore.jsdelivr.net`（实测唯一稳定可用的 jsDelivr 节点）。
+- 修复 `fetchTo` 用 `Readable.fromWeb()` 消费 duck-typed Response 导致的
+  `The "readableStream" argument must be an instance of ReadableStream` —— 之前所有 tarball 源全灭的真因。
 
-### 华为云码道（codearts）
+### 华为云码道（CodeArts）
 
 - 回调支持 `?redirect=` 跟跳，以及 POST 回传 `code`。
 - 换 token 时补 `plugin-name` / `plugin-version` 头。
 - 回调等待 180 秒 → 300 秒。
-- 登录方式只保留国内站一条（原来那条"国际版"其实是华为云企业账号登录页）。
+- 登录方式只保留国内站一条（原来那条「国际版」其实是华为云企业账号登录页）。
 
 ### 修复
 
@@ -31,7 +33,3 @@
 - 业务错误补上 `details` 字段，面板不再显示 `connection: invalid server-response failure`。
 - 卸载插件后面板即时刷新，不再残留幽灵供应商。
 - 插件登录方式为空时按钮不再消失。
-
-## 0.2.0
-
-- 首次公开发布。

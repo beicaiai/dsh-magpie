@@ -2,10 +2,9 @@
 
 | | |
 |---|---|
-| 版本 | 0.2.0 |
 | 许可 | **AGPL-3.0-only**（全文见 [LICENSE](LICENSE)） |
 | Web UI | 来自 **magpie**（MIT），逐文件拷贝，见 [THIRD-PARTY.md](THIRD-PARTY.md) |
-| 宿主实现 | 演化自 **dsh-magpie-hub 0.2.0**（AGPL-3.0），原始版权归 **LingMowen** |
+| 宿主实现 | 演化自 **dsh-magpie-hub**（AGPL-3.0），原始版权归 **LingMowen** |
 
 本文件记录本版相对上述宿主实现的**全部差异**，同时满足 AGPL 对「标明修改」的要求。原始版权与许可声明一律保留，未做任何删除。
 
